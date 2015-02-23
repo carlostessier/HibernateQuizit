@@ -66,7 +66,6 @@ public class HibernateHelper {
 	public void addQuestion(byte id, String text, String category, Set<Answer> answers ){
 				
 		Question question = new Question(id,text,category,answers);	
-		System.out.println(question);
 		saveQuestion(question);
 		
 	}

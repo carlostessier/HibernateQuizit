@@ -6,29 +6,30 @@ import java.awt.event.ActionListener;
 
 import model.HibernateHelper;
 import view.MainWindow;
+import view.TabbedWindow;
 
 
 
 public class Controller {
-	MainWindow view;
+	TabbedWindow view;
 	HibernateHelper model;
 	
 	
 	Controller() {
 		
-		MainWindow view = new MainWindow();
-		HibernateHelper model = new HibernateHelper();	
+		view = new TabbedWindow();
+		model = new HibernateHelper();	
 
-		launchMainWindow(view);		
+		launchMainWindow();		
 		
-		loadCategories(view);	
+		loadCategories();	
 		
-		actionSave(view, model);
+		actionSave();
 		
 	}
 
 
-	private void launchMainWindow(MainWindow view) {
+	private void launchMainWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,7 +42,7 @@ public class Controller {
 	}
 
 
-	private void actionSave(MainWindow view, HibernateHelper model) {
+	private void actionSave() {
 		view.getBtnSaveQuestion().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String sQuestion;
@@ -61,7 +62,7 @@ public class Controller {
 	}
 
 
-	private void loadCategories(MainWindow view) {
+	private void loadCategories() {
 		view.getCategory().addItem("Matemáticas");
 		view.getCategory().addItem("Historia");
 	}
