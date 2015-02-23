@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import utils.SessionFactoryUtil;
 
 public class HibernateHelper {
 	
@@ -31,6 +32,18 @@ public class HibernateHelper {
 
 	}
 	
+	public Question getLastQuestion(){
+		Session session = sesion.openSession();
+		
+		Query query = session.createQuery("from Question order by idQuestion DESC");
+		query.setMaxResults(1);
+		Question last = (Question) query.uniqueResult();
+		session.close();
+
+		return last;
+		
+	}
+	
 	public Question getQuestion(byte id){
 		Session session = sesion.openSession();
 		
@@ -50,10 +63,20 @@ public class HibernateHelper {
 		return question;
 	}
 
-	public void addQuestion(byte id, String text, String category){
+	public void addQuestion(byte id, String text, String category, Set<Answer> answers ){
 				
-		Question question = new Question(id,text,category,new HashSet<Answer>(0));		
+		Question question = new Question(id,text,category,answers);	
+		System.out.println(question);
 		saveQuestion(question);
+		
+	}
+	
+	public void  saveQuestion(Question question){
+		Session session = sesion.openSession();
+		Transaction tx = session.beginTransaction();
+		session.save(question);	
+		tx.commit();
+		session.close();
 		
 	}
 	
@@ -73,25 +96,8 @@ public class HibernateHelper {
 			session.delete(answer);		
 		session.close();
 		
-	}
+	}	
 	
-	public void  saveQuestion(Question question){
-		Session session = sesion.openSession();
-		Transaction tx = session.beginTransaction();
-		session.save(question);		
-		session.close();
-		tx.commit();
-		
-	}
 	
-	public void addAnswer(Answer a, byte idQuestion ){
-		SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
-		Session session = sesion.openSession();
-		Transaction tx = session.beginTransaction();
-				
-		session.save(a);		
-
-		tx.commit();
-		session.close();
-	}
+	
 }
