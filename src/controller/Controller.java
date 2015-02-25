@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.HibernateHelper;
-import view.MainWindow;
 import view.TabbedWindow;
 
 
@@ -63,7 +62,7 @@ public class Controller {
 
 
 	private void loadCategories() {
-		view.getCategory().addItem("Matemáticas");
+		view.getCategory().addItem("Matematicas");
 		view.getCategory().addItem("Historia");
 	}
 
