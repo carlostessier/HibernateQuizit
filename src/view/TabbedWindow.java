@@ -22,9 +22,12 @@ public class TabbedWindow extends JFrame {
 	private JPanel panel2;
 	private JPanel panel3;
 	
-	private static final String TEXT_BUTTON_SAVE = "Save Question";
+	private static final String TEXT_BUTTON_SAVE = "Save";
+	private static final String TEXT_BUTTON_DELETE = "Delete";
+	private static final String TEXT_BUTTON_UPDATE = "Update";
+	private static final String TEXT_BUTTON_CLEAN = "Clean";
 	private static final String TITLE = "Hibernate Quizit";
-	private static final String SAVE_QUESTION = "Save";
+	private static final String MANAGER_TAB = "Question Manager";
 
 	private static final int WITH = 500;
 	private static final int HEIGHT = 300;
@@ -33,11 +36,13 @@ public class TabbedWindow extends JFrame {
 	private JTextField tAnswer1;
 	private JTextField tAnswer2;
 	private JTextField tAnswer3;
-	private JTextField tAnswer4;
-	
-	
+	private JTextField tAnswer4;	
 
 	private JButton btnSaveQuestion;
+	private JButton btnDeleteQuestion;
+	private JButton btnUpdateQuestion;
+	private JButton btnCleanQuestion;
+
 
 	public TabbedWindow() {
 		// NOTE: to reduce the amount of code in this example, it uses
@@ -60,9 +65,11 @@ public class TabbedWindow extends JFrame {
 
 		// Create a tabbed pane
 		tabbedPane = new JTabbedPane();
-		tabbedPane.addTab(SAVE_QUESTION, panel1);
-		tabbedPane.addTab("Page 2", panel2);
-		tabbedPane.addTab("Page 3", panel3);
+		tabbedPane.addTab(MANAGER_TAB, panel1);
+		
+		
+		tabbedPane.addTab("Questions", panel2);
+		tabbedPane.addTab("Categories", panel3);
 		topPanel.add(tabbedPane, BorderLayout.CENTER);
 	}
 
@@ -99,10 +106,21 @@ public class TabbedWindow extends JFrame {
 		panel1.add(tAnswer4);
 		tAnswer4.setColumns(10);
 		
-		btnSaveQuestion = new JButton(TEXT_BUTTON_SAVE);		
+		btnSaveQuestion = new JButton(TEXT_BUTTON_SAVE);			
+		btnSaveQuestion.setBounds(35, 200, 86, 23);
+		panel1.add(btnSaveQuestion);		
+
+		btnDeleteQuestion = new JButton(TEXT_BUTTON_DELETE);
+		btnDeleteQuestion.setBounds(131, 200, 86, 23);
+		panel1.add(btnDeleteQuestion);
 		
-		btnSaveQuestion.setBounds(124, 211, 129, 23);
-		panel1.add(btnSaveQuestion);
+		btnUpdateQuestion = new JButton(TEXT_BUTTON_UPDATE);
+		btnUpdateQuestion.setBounds(230, 200, 86, 23);
+		panel1.add(btnUpdateQuestion);
+		
+		btnCleanQuestion = new JButton(TEXT_BUTTON_CLEAN);
+		btnCleanQuestion.setBounds(333, 200, 86, 23);
+		panel1.add(btnCleanQuestion);
 		
 		category = new JComboBox();
 		category.setBounds(321, 31, 103, 20);
@@ -237,6 +255,7 @@ private JComboBox category;
 	public void settAnswer4(JTextField tAnswer4) {
 		this.tAnswer4 = tAnswer4;
 	}
-
-
+	
+	
+	
 }
